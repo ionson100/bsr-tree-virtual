@@ -651,7 +651,6 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         return this.ListItems;
     }
 
-
     public OpenMenuItemOnly(id?: string) {
         return this.OpenMenuItem(id);
     }
