@@ -1,0 +1,105 @@
+:root {
+    --backMenu: rgb(243, 243, 197);
+    --backMenu_hover: rgb(232, 232, 213);
+    --backMenu_hover_select_active: rgb(215, 215, 179);
+    --font-color: rgb(61, 61, 60);
+    --font_size: 20px;
+    --drop-menu-width: 5px;
+    --drop-menu-hover: rgb(17, 17, 17);
+    --scroll-width: 10px;
+    --scroll-track-color: rgb(60, 60, 59);
+    --scroll-thumb-color: rgb(125, 125, 106);
+}
+
+.t-over {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tree-menu-item {
+
+    font-size: var(--font_size);
+    padding: 4px;
+    cursor: pointer;
+    width: fit-content;
+
+    color: var(--font-color);
+    border-radius: 5px;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.inner-div-a {
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+}
+
+.tree-menu-item:hover {
+    background: var(--backMenu_hover);
+}
+
+.tree-menu-item:active {
+    background: var(--backMenu_hover_select_active);
+}
+
+.select-tree-item {
+    background: var(--backMenu_hover_select_active)
+}
+
+
+a[data-a-tree] {
+    text-decoration: none;
+    display: block;
+}
+
+
+
+
+/*___________content item menu______________*/
+.tree-menu-item-icon-tree {
+    display: flex;
+    align-items: center;
+}
+
+.tree-menu-item-left-image {
+    padding: 0 5px 0 2px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+
+}
+
+.tree-menu-item-text {
+    width: 100%;
+    padding-left:5px;
+    display: flex;
+    align-items: center;
+
+}
+.tree-menu-check-host {
+    display: flex;
+    padding-top: 1px;
+    padding-left: 1px;
+
+    align-items: center;
+}
+
+.tree-menu-item-right-image {
+    display: flex;
+    align-items: center;
+
+}
+input[type=checkbox] {
+    transform: scale(1.5);
+}
+.tree-menu-host{
+    border: 3px solid var(--backMenu_hover_select_active);
+    padding-left: 20px;
+
+}
+
+
+
