@@ -344,23 +344,24 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
     componentDidMount() {
         window.addEventListener("keyup", this.keyTabEnter) //todo remove
+        setTimeout(()=>{
+            this.ListItems = this.props.items;
+            this.actionWrapper()
+            if (this.props.callbackVirtualSize) {
+                const vz = this.props.callbackVirtualSize()
+                this.wightVirtual = vz.wight;
+                this.heightVirtual = vz.height
+            }
+            if (this.props.height) {
+                this.heightVirtual = this.props.height
+            }
+            if (this.props.wight) {
+                this.wightVirtual = this.props.wight
+            }
+            this.wrapperItemsCore = undefined;
+            this.forceUpdate()
+        })
 
-
-        this.ListItems = this.props.items;
-        this.actionWrapper()
-        if (this.props.callbackVirtualSize) {
-            const vz = this.props.callbackVirtualSize()
-            this.wightVirtual = vz.wight;
-            this.heightVirtual = vz.height
-        }
-        if (this.props.height) {
-            this.heightVirtual = this.props.height
-        }
-        if (this.props.wight) {
-            this.wightVirtual = this.props.wight
-        }
-        this.wrapperItemsCore = undefined;
-        this.forceUpdate()
 
 
     }
@@ -370,11 +371,15 @@ export class TreeMenu extends React.Component<TreeProps, any> {
     }
 
     componentWillUnmount() {
-
+        window.removeEventListener("keyup", this.keyTabEnter)
     }
 
     public RefreshMenu(callback?: () => void): void {
-        this.wrapperItemsCore!.forEach(a => {
+        if(!this.wrapperItems||!this.wrapperItemsCore) return
+        this.wrapperItems.forEach(a=>{
+            a.item.___isVisible=false;
+        })
+        this.wrapperItemsCore.forEach(a => {
             a.item.___isVisible = true
         })
         this.actionWrapper()
@@ -731,9 +736,6 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                 })
             }
         }
-
-
-
         recursionDelete(this.ListItems)
 
         this.RefreshMenu()
