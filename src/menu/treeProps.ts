@@ -4,8 +4,17 @@ import React from 'react'
 
 export class MenuItem {
 
+    /**
+     * Unique identifier, required
+     */
     public id: string = uuidv4();
+    /**
+     * Menu content
+     */
     public content?: any = undefined;
+    /**
+     * The title global attribute  contains text representing advisory information
+     */
     public title?: string | undefined = undefined
     public icon?: any = undefined
     public items?: Array<MenuItem> = []
@@ -29,7 +38,7 @@ export class MenuItem {
         this.items!.push(menuItem)
         return this
     }
-    public __wrapper:WrapperMenuItems|undefined=undefined;
+    public __wrapper?:WrapperMenuItems=undefined;
 }
  export type ParamsClick={
     path?:Array<MenuItem>

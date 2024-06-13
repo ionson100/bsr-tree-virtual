@@ -23,7 +23,7 @@ function App() {
 
 
 
-                useCheckBox={true}
+                useCheckBox={false}
                 ref={menu}
                 marginItem={20}
                 callbackVirtualSize={()=>{
@@ -113,10 +113,17 @@ function App() {
                 <button onClick={() => {
 
 
-
                     menu.current!.RewriteItems(...GetListItem())
 
                 }} style={{margin: 10}}>Rewrite
+                </button>
+
+                <button onClick={() => {
+
+
+                    menu.current!.DeleteItems(input.current!.value)
+
+                }} style={{margin: 10}}>Delete item
                 </button>
             </div>
         </div>

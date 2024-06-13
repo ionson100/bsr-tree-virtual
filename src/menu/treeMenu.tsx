@@ -10,20 +10,19 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         className: 'host-menu',
         marginItem: 25,
     }
-    public wrapperItems: Array<WrapperMenuItems>;
-    public wrapperItemsCore: Array<WrapperMenuItems> | undefined;
-    public mRewList: React.RefObject<FixedSizeList>
-    public mRewHost: React.RefObject<HTMLDivElement>
-    public heightVirtual?: number
-    public wightVirtual?: number
-    public ListItems: Array<MenuItem> | undefined;
-    public clickResult: boolean;
-    public startTab: number;
-    public selected?: {
-        id: string | undefined | null
-    }
-    public accessKey?: string
-    public blockKey: boolean = false;
+
+    private wrapperItems: Array<WrapperMenuItems>;
+    private wrapperItemsCore: Array<WrapperMenuItems> | undefined;
+    protected mRewList: React.RefObject<FixedSizeList>
+    protected mRewHost: React.RefObject<HTMLDivElement>
+    private heightVirtual?: number
+    private wightVirtual?: number
+    private ListItems: Array<MenuItem> | undefined;
+
+    private startTab: number;
+
+    private accessKey?: string
+    private blockKey: boolean = false;
 
 
     constructor({props}: { props: Readonly<TreeProps> }) {
@@ -31,11 +30,11 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         this.mRewList = React.createRef<FixedSizeList>()
         this.mRewHost = React.createRef<HTMLDivElement>();
         this.clickItemNew = this.clickItemNew.bind(this)
-        this.selective = this.selective.bind(this)
+
         this.keyTabEnter = this.keyTabEnter.bind(this)
         this.itemChecked = this.itemChecked.bind(this)
         this.Row = this.Row.bind(this)
-        this.clickResult = false;
+
         this.ListItems = [];
         this.wrapperItems = [];
         this.wrapperItemsCore = undefined
@@ -144,6 +143,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         this.ListItems?.forEach(a => {
             actionWrapperRecursion(a, true, -1)
         })
+        console.log(this.wrapperItems.length)
     }
 
     private selectItem(id: string) {
@@ -257,34 +257,25 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
 
         return (
-            <>
+            <a
 
-                {
-                    item.isShow ? (
-                        <>
-                            <a
-                                title={item.title}
-                                style={item.style}
-                                target={item.target ? item.target : '_self'}
-                                data-user-tree={item.dataUser}
-                                data-tree-item={1}
-                                data-root={!item.icon ? '1' : undefined}
-                                onDragStart={this.noDrag}
-                                href={innerUrl}
-                                tabIndex={this.getTab()}
-                                data-a-tree={1}
-                                id={item.id} className={item.className ? item.className : 'tree-menu-item'}
-                                onClick={this.clickItemNew}
-                                key={item.id}>
+                title={item.title}
+                style={item.style}
+                target={item.target ? item.target : '_self'}
+                data-user-tree={item.dataUser}
+                data-tree-item={1}
+                data-root={!item.icon ? '1' : undefined}
+                onDragStart={this.noDrag}
+                href={innerUrl}
+                tabIndex={this.getTab()}
+                data-a-tree={1}
+                id={item.id}
+                className={item.className ? item.className : 'tree-menu-item'}
+                onClick={this.clickItemNew}
+                key={item.id}>
 
-                                {getRootElement(item)}
-                            </a>
-
-                        </>
-
-                    ) : null
-                }
-            </>
+                {getRootElement(item)}
+            </a>
 
         )
     }
@@ -315,7 +306,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         }
 
         e.stopPropagation();
-        this.selected = undefined;
+
 
         const id = e.currentTarget.getAttribute('id')
         if (!id) return;
@@ -568,31 +559,23 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         }
 
         return (
-            <>
-                {
-                    item.isShow ? (
-                        <>
-                            <a
-                                title={item.title}
-                                style={curStyle}
-                                target={item.target ? item.target : '_self'}
-                                data-user-tree={item.dataUser}
-                                onDragStart={this.noDrag}
-                                href={innerUrl}
-                                data-tree-item={1}
-                                tabIndex={this.getTab()} data-a-tree={1}
-                                id={item.id}
-                                data-root={0}
-                                className={item.className ? item.className : 'tree-menu-item'}
-                                onClick={this.clickItemNew}
-                                key={item.id}>
+            <a
+                title={item.title}
+                style={curStyle}
+                target={item.target ? item.target : '_self'}
+                data-user-tree={item.dataUser}
+                onDragStart={this.noDrag}
+                href={innerUrl}
+                data-tree-item={1}
+                tabIndex={this.getTab()} data-a-tree={1}
+                id={item.id}
+                data-root={0}
+                className={item.className ? item.className : 'tree-menu-item'}
+                onClick={this.clickItemNew}
+                key={item.id}>
 
-                                {getItemElement(item)}
-                            </a>
-                        </>
-                    ) : null
-                }
-            </>
+                {getItemElement(item)}
+            </a>
         )
     }
 
@@ -671,18 +654,18 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         this.RefreshMenu()
     }
 
-    private selective() {
-        if (document.activeElement!.getAttribute("data-a-tree")) {
-            const id = document.activeElement!.id;
-
-            if (id) {
-
-                this.selected = {
-                    id: id
-                }
-            }
-        }
-    }
+    // private selective() {
+    //     if (document.activeElement!.getAttribute("data-a-tree")) {
+    //         const id = document.activeElement!.id;
+    //
+    //         if (id) {
+    //
+    //             this.selected = {
+    //                 id: id
+    //             }
+    //         }
+    //     }
+    // }
 
     public GetMenuItems(id?: string): MenuItem | undefined {
         let menuItem: MenuItem | undefined = undefined;
@@ -722,6 +705,35 @@ export class TreeMenu extends React.Component<TreeProps, any> {
     public RewriteItems(...items: MenuItem[]) {
         this.ListItems = [];
         this.ListItems.push(...items)
+        this.RefreshMenu()
+    }
+
+    public DeleteItems(id: string) {
+
+        function recursionDelete(items: MenuItem[]|undefined) {
+
+            if(!items||items.length===0) return
+            let index=-1
+            for (let i = 0; i < items.length; i++) {
+                if(items[i].id===id){
+                    index=i;
+                    break;
+                }
+            }
+            if(index!==-1){
+
+                items.splice(index,1)
+            }else{
+                items.forEach(a=>{
+                    recursionDelete(a.items)
+                })
+            }
+        }
+
+
+
+        recursionDelete(this.ListItems)
+
         this.RefreshMenu()
     }
 
