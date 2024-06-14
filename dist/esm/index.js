@@ -4167,7 +4167,7 @@ var TreeMenu = /** @class */ (function (_super) {
     TreeMenu.prototype.render = function () {
         var _a, _b, _c;
         return (React.createElement("div", { ref: this.mRewHost, className: 'tree-menu-host' },
-            React.createElement(FixedSizeList, { ref: this.mRewList, itemData: this.wrapperFilter(), height: (_a = this.heightVirtual) !== null && _a !== void 0 ? _a : 1000, itemCount: this.wrapperFilter().length, itemSize: (_b = this.props.itemSize) !== null && _b !== void 0 ? _b : 35, width: (_c = this.wightVirtual) !== null && _c !== void 0 ? _c : 1000 }, this.Row)));
+            React.createElement(FixedSizeList, { style: this.props.style, ref: this.mRewList, itemData: this.wrapperFilter(), height: (_a = this.heightVirtual) !== null && _a !== void 0 ? _a : 1000, itemCount: this.wrapperFilter().length, itemSize: (_b = this.props.itemSize) !== null && _b !== void 0 ? _b : 35, width: (_c = this.wightVirtual) !== null && _c !== void 0 ? _c : 1000 }, this.Row)));
     };
     TreeMenu.prototype.Collapse = function (callback) {
         var _this = this;

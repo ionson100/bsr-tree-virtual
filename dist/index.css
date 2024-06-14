@@ -99,7 +99,7 @@ a[data-a-tree] {
 
 .tree-menu-host{
     border: 3px solid var(--backMenu_hover_select_active);
-    padding: 5px 10px;
+    padding-left: 10px;
     background: white;
 
 }
