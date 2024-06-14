@@ -52,8 +52,44 @@ export class MenuItem {
         this.items=[];
 
     }
-    public AddItem(menuItem: MenuItem) {
-        this.items!.push(menuItem)
+    public static CreateInstanceItem(
+        {id,content,title,icon,isOpen,url,style,className,dataUser,target,selected,accessKey,items}:
+            {
+                id:string,
+                content:any,
+                title?:string,
+                icon:any,
+                isOpen?:boolean,
+                url?:(()=>void) | string,
+                style?: React.CSSProperties,
+                className?: string,
+                dataUser?:string,
+                target?:string,
+                selected?:boolean,
+                accessKey?: string,
+                items?: Array<MenuItem>
+            }):MenuItem{
+        const m=new MenuItem();
+        m.id=id??uuidv4();
+        m.content=content;
+        m.title=title;
+        m.icon=icon;
+        m.isOpen=isOpen??false;
+        m.target=target??'_self'
+        m.url=url;
+        m.style=style;
+        m.className=className;
+        m.dataUser=dataUser;
+        m.selected=selected??false;
+        m.accessKey=accessKey;
+        m.items=items??[];
+
+
+        return m;
+    }
+
+    public AddItem(...menuItem: MenuItem[]) {
+        this.items!.push(...menuItem)
         return this
     }
 

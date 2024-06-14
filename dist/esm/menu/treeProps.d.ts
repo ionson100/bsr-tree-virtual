@@ -40,7 +40,22 @@ export declare class MenuItem {
     ___isVisible?: boolean;
     accessKey?: string;
     constructor(content?: any, icon?: any);
-    AddItem(menuItem: MenuItem): this;
+    static CreateInstanceItem({ id, content, title, icon, isOpen, url, style, className, dataUser, target, selected, accessKey, items }: {
+        id: string;
+        content: any;
+        title?: string;
+        icon: any;
+        isOpen?: boolean;
+        url?: (() => void) | string;
+        style?: React.CSSProperties;
+        className?: string;
+        dataUser?: string;
+        target?: string;
+        selected?: boolean;
+        accessKey?: string;
+        items?: Array<MenuItem>;
+    }): MenuItem;
+    AddItem(...menuItem: MenuItem[]): this;
     /**
      * For internal use
      */

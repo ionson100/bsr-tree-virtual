@@ -140,8 +140,31 @@ var MenuItem = /** @class */ (function () {
         this.icon = icon;
         this.items = [];
     }
-    MenuItem.prototype.AddItem = function (menuItem) {
-        this.items.push(menuItem);
+    MenuItem.CreateInstanceItem = function (_a) {
+        var id = _a.id, content = _a.content, title = _a.title, icon = _a.icon, isOpen = _a.isOpen, url = _a.url, style = _a.style, className = _a.className, dataUser = _a.dataUser, target = _a.target, selected = _a.selected, accessKey = _a.accessKey, items = _a.items;
+        var m = new MenuItem();
+        m.id = id !== null && id !== void 0 ? id : v4();
+        m.content = content;
+        m.title = title;
+        m.icon = icon;
+        m.isOpen = isOpen !== null && isOpen !== void 0 ? isOpen : false;
+        m.target = target !== null && target !== void 0 ? target : '_self';
+        m.url = url;
+        m.style = style;
+        m.className = className;
+        m.dataUser = dataUser;
+        m.selected = selected !== null && selected !== void 0 ? selected : false;
+        m.accessKey = accessKey;
+        m.items = items !== null && items !== void 0 ? items : [];
+        return m;
+    };
+    MenuItem.prototype.AddItem = function () {
+        var _a;
+        var menuItem = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            menuItem[_i] = arguments[_i];
+        }
+        (_a = this.items).push.apply(_a, menuItem);
         return this;
     };
     return MenuItem;
