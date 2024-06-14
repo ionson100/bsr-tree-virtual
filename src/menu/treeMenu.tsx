@@ -596,6 +596,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         return (
             <div ref={this.mRewHost} className={'tree-menu-host'}>
                 <List
+                    style={this.props.style}
                     ref={this.mRewList}
                     itemData={this.wrapperFilter()}
                     height={this.heightVirtual ?? 1000}
