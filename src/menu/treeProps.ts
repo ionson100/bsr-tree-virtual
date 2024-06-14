@@ -46,7 +46,7 @@ export class MenuItem {
      */
     public ___isVisible?:boolean = false;
     public accessKey?: string;
-    constructor(content?: string,icon?:any) {
+    constructor(content?: any,icon?:any) {
         this.content = content;
         this.icon = icon;
         this.items=[];
@@ -71,6 +71,10 @@ export class MenuItem {
 
 export type TreeProps = {
 
+    /**
+     * Approximate height of element item default 35
+     */
+    itemSize?:number
     /**
      * Root items array
      */

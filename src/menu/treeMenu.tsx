@@ -1,6 +1,6 @@
 import {MenuItem, TreeProps, WrapperMenuItems} from "./treeProps";
 import React, {ReactElement} from "react";
-import './index.css'
+//import './index.css'
 import {FixedSizeList, FixedSizeList as List} from 'react-window';
 
 
@@ -25,6 +25,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
     private accessKey?: string
     private blockKey: boolean = false;
+    //private selectHtmlElement?:HTMLElement=undefined
 
 
     constructor({props}: { props: Readonly<TreeProps> }) {
@@ -69,10 +70,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
     }
 
     private keyTabEnter(e: KeyboardEvent) {
-
-
         if (this.blockKey) return;
-
         if (e.ctrlKey && e.altKey) {
             if (!this.accessKey) this.accessKey = ''
             this.accessKey = this.accessKey + e.key
@@ -94,25 +92,25 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                 this.accessKey = undefined
 
             }, 10)
-
-
         }
-
-
-        // if (e.key === 'Tab' ) {
-        //     this.selected = undefined
-        //     if (e.shiftKey) /* shift + tab */ {
-        //         this.selective()
-        //     } else /* tab */ {
-        //         this.selective()
+        // if(e.key==="Tab"){
+        //    const d=e.target as HTMLElement
+        //     if(d.getAttribute("data-tree-item")){
+        //         this.selectHtmlElement=d;
+        //     }else{
+        //         this.selectHtmlElement=undefined;
         //     }
         // }
-        // if (e.key === 'Enter') {
-        //     if (this.selected) {
-        //         this.innerClick(this.selected.id!);
-        //     }
-        // }
-
+        if(e.key==="Enter"){//&&this.selectHtmlElement
+            const  dd=document.activeElement;
+            if(dd){
+                if(dd.getAttribute("data-tree-item")){
+                    const  d=dd as HTMLElement;
+                    d.click()
+                }
+            }
+            //this.selectHtmlElement.click()
+        }
     }
 
     private actionWrapper() {
@@ -162,13 +160,6 @@ export class TreeMenu extends React.Component<TreeProps, any> {
             selectTarget.forEach(a => {
                     res = a as HTMLAnchorElement
                     a.classList.add('select-tree-item')
-                    // if (!cal && callback) {
-                    //
-                    //     setTimeout(() => {
-                    //         callback(res!);
-                    //     })
-                    //     cal = true;
-                    // }
                 }
             );
         }
@@ -308,6 +299,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         }
 
         e.stopPropagation();
+        //this.selectHtmlElement=e.target as HTMLElement
 
 
         const id = e.currentTarget.getAttribute('id')
@@ -544,9 +536,9 @@ export class TreeMenu extends React.Component<TreeProps, any> {
             </div>;
         }
 
-        if (!item.items || item.items.length <= 0) {
-            padding = padding + 1
-        }
+        // if ((!item.items || item.items.length ===1)&&this.props.iconTree) {
+        //     padding = 0
+        // }
 
         let curStyle: React.CSSProperties | undefined
         curStyle = {marginLeft: padding * this.props.marginItem}
@@ -567,6 +559,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
         return (
             <a
+
                 title={item.title}
                 style={curStyle}
                 target={item.target ? item.target : '_self'}
@@ -607,7 +600,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                     itemData={this.wrapperFilter()}
                     height={this.heightVirtual ?? 1000}
                     itemCount={this.wrapperFilter().length}
-                    itemSize={33}
+                    itemSize={this.props.itemSize??35}
                     width={this.wightVirtual ?? 1000}
                 >
                     {this.Row}
@@ -661,18 +654,6 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         this.RefreshMenu()
     }
 
-    // private selective() {
-    //     if (document.activeElement!.getAttribute("data-a-tree")) {
-    //         const id = document.activeElement!.id;
-    //
-    //         if (id) {
-    //
-    //             this.selected = {
-    //                 id: id
-    //             }
-    //         }
-    //     }
-    // }
 
     public GetMenuItems(id?: string): MenuItem | undefined {
         let menuItem: MenuItem | undefined = undefined;
