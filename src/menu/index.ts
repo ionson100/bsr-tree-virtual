@@ -1,7 +1,7 @@
 import {TreeMenu} from "./treeMenu";
-import {MenuItem, WrapperMenuItems ,ParamsClick,VirtualSize ,ParamsItems} from "./treeProps"
+import {MenuItem, WrapperMenuItems ,ParamsClick,VirtualSize ,ParamsItems,CreateItem} from "./treeProps"
 export {
-    TreeMenu,MenuItem, WrapperMenuItems
+    TreeMenu,MenuItem, WrapperMenuItems,CreateItem
 }
 export type {
     ParamsClick,VirtualSize,ParamsItems

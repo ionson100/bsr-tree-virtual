@@ -16,6 +16,7 @@ type ParamsItems = {
     accessKey?: string;
     items?: Array<MenuItem>;
 };
+declare function CreateItem(p: ParamsItems): MenuItem;
 declare class MenuItem {
     /**
      * Unique identifier, required
@@ -56,7 +57,6 @@ declare class MenuItem {
     ___isVisible?: boolean;
     accessKey?: string;
     constructor(content?: any, icon?: any);
-    static CreateInstanceItem(p: ParamsItems): MenuItem;
     AddItem(...menuItem: MenuItem[]): this;
     /**
      * For internal use
@@ -187,4 +187,4 @@ declare class TreeMenu extends React.Component<TreeProps, any> {
     DeleteItems(id: string): void;
 }
 
-export { MenuItem, type ParamsClick, type ParamsItems, TreeMenu, type VirtualSize, WrapperMenuItems };
+export { CreateItem, MenuItem, type ParamsClick, type ParamsItems, TreeMenu, type VirtualSize, WrapperMenuItems };

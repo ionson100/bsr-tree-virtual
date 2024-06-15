@@ -17,6 +17,25 @@ export type ParamsItems ={
     accessKey?: string,
     items?: Array<MenuItem>
 }
+ export function CreateItem(p:ParamsItems){
+    const m=new MenuItem();
+    m.id=p.id??uuidv4();
+    m.content=p.content;
+    m.title=p.title;
+    m.icon=p.icon;
+    m.isOpen=p.isOpen??false;
+    m.target=p.target??'_self'
+    m.url=p.url;
+    m.style=p.style;
+    m.className=p.className;
+    m.dataUser=p.dataUser;
+    m.selected=p.selected??false;
+    m.accessKey=p.accessKey;
+    m.items=p.items??[];
+
+
+    return m;
+}
 
 export class MenuItem {
 
@@ -68,25 +87,7 @@ export class MenuItem {
         this.items=[];
 
     }
-    public static CreateInstanceItem(p:ParamsItems):MenuItem{
-        const m=new MenuItem();
-        m.id=p.id??uuidv4();
-        m.content=p.content;
-        m.title=p.title;
-        m.icon=p.icon;
-        m.isOpen=p.isOpen??false;
-        m.target=p.target??'_self'
-        m.url=p.url;
-        m.style=p.style;
-        m.className=p.className;
-        m.dataUser=p.dataUser;
-        m.selected=p.selected??false;
-        m.accessKey=p.accessKey;
-        m.items=p.items??[];
 
-
-        return m;
-    }
 
     public AddItem(...menuItem: MenuItem[]) {
         this.items!.push(...menuItem)

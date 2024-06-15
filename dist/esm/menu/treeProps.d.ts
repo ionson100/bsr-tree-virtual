@@ -15,6 +15,7 @@ export type ParamsItems = {
     accessKey?: string;
     items?: Array<MenuItem>;
 };
+export declare function CreateItem(p: ParamsItems): MenuItem;
 export declare class MenuItem {
     /**
      * Unique identifier, required
@@ -55,7 +56,6 @@ export declare class MenuItem {
     ___isVisible?: boolean;
     accessKey?: string;
     constructor(content?: any, icon?: any);
-    static CreateInstanceItem(p: ParamsItems): MenuItem;
     AddItem(...menuItem: MenuItem[]): this;
     /**
      * For internal use

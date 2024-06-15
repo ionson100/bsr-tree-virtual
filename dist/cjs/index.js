@@ -100,6 +100,24 @@ function v4(options, buf, offset) {
   return stringify(rnds);
 }
 
+function CreateItem(p) {
+    var _a, _b, _c, _d, _e;
+    var m = new MenuItem();
+    m.id = (_a = p.id) !== null && _a !== void 0 ? _a : v4();
+    m.content = p.content;
+    m.title = p.title;
+    m.icon = p.icon;
+    m.isOpen = (_b = p.isOpen) !== null && _b !== void 0 ? _b : false;
+    m.target = (_c = p.target) !== null && _c !== void 0 ? _c : '_self';
+    m.url = p.url;
+    m.style = p.style;
+    m.className = p.className;
+    m.dataUser = p.dataUser;
+    m.selected = (_d = p.selected) !== null && _d !== void 0 ? _d : false;
+    m.accessKey = p.accessKey;
+    m.items = (_e = p.items) !== null && _e !== void 0 ? _e : [];
+    return m;
+}
 var MenuItem = /** @class */ (function () {
     function MenuItem(content, icon) {
         /**
@@ -140,24 +158,6 @@ var MenuItem = /** @class */ (function () {
         this.icon = icon;
         this.items = [];
     }
-    MenuItem.CreateInstanceItem = function (p) {
-        var _a, _b, _c, _d, _e;
-        var m = new MenuItem();
-        m.id = (_a = p.id) !== null && _a !== void 0 ? _a : v4();
-        m.content = p.content;
-        m.title = p.title;
-        m.icon = p.icon;
-        m.isOpen = (_b = p.isOpen) !== null && _b !== void 0 ? _b : false;
-        m.target = (_c = p.target) !== null && _c !== void 0 ? _c : '_self';
-        m.url = p.url;
-        m.style = p.style;
-        m.className = p.className;
-        m.dataUser = p.dataUser;
-        m.selected = (_d = p.selected) !== null && _d !== void 0 ? _d : false;
-        m.accessKey = p.accessKey;
-        m.items = (_e = p.items) !== null && _e !== void 0 ? _e : [];
-        return m;
-    };
     MenuItem.prototype.AddItem = function () {
         var _a;
         var menuItem = [];
@@ -4309,6 +4309,7 @@ var TreeMenu = /** @class */ (function (_super) {
     return TreeMenu;
 }(React.Component));
 
+exports.CreateItem = CreateItem;
 exports.MenuItem = MenuItem;
 exports.TreeMenu = TreeMenu;
 exports.WrapperMenuItems = WrapperMenuItems;
