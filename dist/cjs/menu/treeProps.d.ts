@@ -1,5 +1,20 @@
 import { TreeMenu } from "./treeMenu";
 import React from 'react';
+export type ParamsItems = {
+    id?: string;
+    content?: any;
+    title?: string;
+    icon?: any;
+    isOpen?: boolean;
+    url?: (() => void) | string;
+    style?: React.CSSProperties;
+    className?: string;
+    dataUser?: string;
+    target?: string;
+    selected?: boolean;
+    accessKey?: string;
+    items?: Array<MenuItem>;
+};
 export declare class MenuItem {
     /**
      * Unique identifier, required
@@ -40,21 +55,7 @@ export declare class MenuItem {
     ___isVisible?: boolean;
     accessKey?: string;
     constructor(content?: any, icon?: any);
-    static CreateInstanceItem({ id, content, title, icon, isOpen, url, style, className, dataUser, target, selected, accessKey, items }: {
-        id?: string;
-        content?: any;
-        title?: string;
-        icon?: any;
-        isOpen?: boolean;
-        url?: (() => void) | string;
-        style?: React.CSSProperties;
-        className?: string;
-        dataUser?: string;
-        target?: string;
-        selected?: boolean;
-        accessKey?: string;
-        items?: Array<MenuItem>;
-    }): MenuItem;
+    static CreateInstanceItem(p: ParamsItems): MenuItem;
     AddItem(...menuItem: MenuItem[]): this;
     /**
      * For internal use

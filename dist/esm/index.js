@@ -138,22 +138,22 @@ var MenuItem = /** @class */ (function () {
         this.icon = icon;
         this.items = [];
     }
-    MenuItem.CreateInstanceItem = function (_a) {
-        var id = _a.id, content = _a.content, title = _a.title, icon = _a.icon, isOpen = _a.isOpen, url = _a.url, style = _a.style, className = _a.className, dataUser = _a.dataUser, target = _a.target, selected = _a.selected, accessKey = _a.accessKey, items = _a.items;
+    MenuItem.CreateInstanceItem = function (p) {
+        var _a, _b, _c, _d, _e;
         var m = new MenuItem();
-        m.id = id !== null && id !== void 0 ? id : v4();
-        m.content = content;
-        m.title = title;
-        m.icon = icon;
-        m.isOpen = isOpen !== null && isOpen !== void 0 ? isOpen : false;
-        m.target = target !== null && target !== void 0 ? target : '_self';
-        m.url = url;
-        m.style = style;
-        m.className = className;
-        m.dataUser = dataUser;
-        m.selected = selected !== null && selected !== void 0 ? selected : false;
-        m.accessKey = accessKey;
-        m.items = items !== null && items !== void 0 ? items : [];
+        m.id = (_a = p.id) !== null && _a !== void 0 ? _a : v4();
+        m.content = p.content;
+        m.title = p.title;
+        m.icon = p.icon;
+        m.isOpen = (_b = p.isOpen) !== null && _b !== void 0 ? _b : false;
+        m.target = (_c = p.target) !== null && _c !== void 0 ? _c : '_self';
+        m.url = p.url;
+        m.style = p.style;
+        m.className = p.className;
+        m.dataUser = p.dataUser;
+        m.selected = (_d = p.selected) !== null && _d !== void 0 ? _d : false;
+        m.accessKey = p.accessKey;
+        m.items = (_e = p.items) !== null && _e !== void 0 ? _e : [];
         return m;
     };
     MenuItem.prototype.AddItem = function () {

@@ -1,6 +1,21 @@
 import React from 'react';
 import { FixedSizeList } from 'react-window';
 
+type ParamsItems = {
+    id?: string;
+    content?: any;
+    title?: string;
+    icon?: any;
+    isOpen?: boolean;
+    url?: (() => void) | string;
+    style?: React.CSSProperties;
+    className?: string;
+    dataUser?: string;
+    target?: string;
+    selected?: boolean;
+    accessKey?: string;
+    items?: Array<MenuItem>;
+};
 declare class MenuItem {
     /**
      * Unique identifier, required
@@ -41,21 +56,7 @@ declare class MenuItem {
     ___isVisible?: boolean;
     accessKey?: string;
     constructor(content?: any, icon?: any);
-    static CreateInstanceItem({ id, content, title, icon, isOpen, url, style, className, dataUser, target, selected, accessKey, items }: {
-        id?: string;
-        content?: any;
-        title?: string;
-        icon?: any;
-        isOpen?: boolean;
-        url?: (() => void) | string;
-        style?: React.CSSProperties;
-        className?: string;
-        dataUser?: string;
-        target?: string;
-        selected?: boolean;
-        accessKey?: string;
-        items?: Array<MenuItem>;
-    }): MenuItem;
+    static CreateInstanceItem(p: ParamsItems): MenuItem;
     AddItem(...menuItem: MenuItem[]): this;
     /**
      * For internal use
@@ -186,4 +187,4 @@ declare class TreeMenu extends React.Component<TreeProps, any> {
     DeleteItems(id: string): void;
 }
 
-export { MenuItem, type ParamsClick, TreeMenu, type VirtualSize, WrapperMenuItems };
+export { MenuItem, type ParamsClick, type ParamsItems, TreeMenu, type VirtualSize, WrapperMenuItems };

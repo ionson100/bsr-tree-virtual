@@ -1,4 +1,4 @@
 import { TreeMenu } from "./treeMenu";
-import { MenuItem, WrapperMenuItems, ParamsClick, VirtualSize } from "./treeProps";
+import { MenuItem, WrapperMenuItems, ParamsClick, VirtualSize, ParamsItems } from "./treeProps";
 export { TreeMenu, MenuItem, WrapperMenuItems };
-export type { ParamsClick, VirtualSize };
+export type { ParamsClick, VirtualSize, ParamsItems };

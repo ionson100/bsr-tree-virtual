@@ -2,6 +2,22 @@ import {v4 as uuidv4} from 'uuid';
 import {TreeMenu} from "./treeMenu";
 import React from 'react'
 
+export type ParamsItems ={
+    id?:string,
+    content?:any,
+    title?:string,
+    icon?:any,
+    isOpen?:boolean,
+    url?:(()=>void) | string,
+    style?: React.CSSProperties,
+    className?: string,
+    dataUser?:string,
+    target?:string,
+    selected?:boolean,
+    accessKey?: string,
+    items?: Array<MenuItem>
+}
+
 export class MenuItem {
 
     /**
@@ -52,37 +68,21 @@ export class MenuItem {
         this.items=[];
 
     }
-    public static CreateInstanceItem(
-        {id,content,title,icon,isOpen,url,style,className,dataUser,target,selected,accessKey,items}:
-            {
-                id?:string,
-                content?:any,
-                title?:string,
-                icon?:any,
-                isOpen?:boolean,
-                url?:(()=>void) | string,
-                style?: React.CSSProperties,
-                className?: string,
-                dataUser?:string,
-                target?:string,
-                selected?:boolean,
-                accessKey?: string,
-                items?: Array<MenuItem>
-            }):MenuItem{
+    public static CreateInstanceItem(p:ParamsItems):MenuItem{
         const m=new MenuItem();
-        m.id=id??uuidv4();
-        m.content=content;
-        m.title=title;
-        m.icon=icon;
-        m.isOpen=isOpen??false;
-        m.target=target??'_self'
-        m.url=url;
-        m.style=style;
-        m.className=className;
-        m.dataUser=dataUser;
-        m.selected=selected??false;
-        m.accessKey=accessKey;
-        m.items=items??[];
+        m.id=p.id??uuidv4();
+        m.content=p.content;
+        m.title=p.title;
+        m.icon=p.icon;
+        m.isOpen=p.isOpen??false;
+        m.target=p.target??'_self'
+        m.url=p.url;
+        m.style=p.style;
+        m.className=p.className;
+        m.dataUser=p.dataUser;
+        m.selected=p.selected??false;
+        m.accessKey=p.accessKey;
+        m.items=p.items??[];
 
 
         return m;
