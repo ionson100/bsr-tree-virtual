@@ -55,10 +55,10 @@ export class MenuItem {
     public static CreateInstanceItem(
         {id,content,title,icon,isOpen,url,style,className,dataUser,target,selected,accessKey,items}:
             {
-                id:string,
-                content:any,
+                id?:string,
+                content?:any,
                 title?:string,
-                icon:any,
+                icon?:any,
                 isOpen?:boolean,
                 url?:(()=>void) | string,
                 style?: React.CSSProperties,
