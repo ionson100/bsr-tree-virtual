@@ -3891,7 +3891,6 @@ var TreeMenu = /** @class */ (function (_super) {
         (_a = this.ListItems) === null || _a === void 0 ? void 0 : _a.forEach(function (a) {
             actionWrapperRecursion(a, true, -1);
         });
-        console.log(this.wrapperItems.length);
     };
     TreeMenu.prototype.selectItem = function (id) {
         var _a, _b;
@@ -3997,7 +3996,7 @@ var TreeMenu = /** @class */ (function (_super) {
                 var element = _this.selectItem(id);
                 if (_this.props.onClickMenuItem) {
                     _this.props.onClickMenuItem(_this, {
-                        items: _this.GetMenuItems(id),
+                        item: _this.GetMenuItems(id),
                         path: _this.GetPath(id),
                         element: element
                     });
@@ -4124,7 +4123,7 @@ var TreeMenu = /** @class */ (function (_super) {
                     _this.props.onClickMenuItem(_this, {
                         element: element,
                         path: listPath,
-                        items: listPath[listPath.length - 1]
+                        item: listPath[listPath.length - 1]
                     });
                 }
             }, 50);

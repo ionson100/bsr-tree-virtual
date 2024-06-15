@@ -143,7 +143,6 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         this.ListItems?.forEach(a => {
             actionWrapperRecursion(a, true, -1)
         })
-        console.log(this.wrapperItems.length)
     }
 
     private selectItem(id: string) {
@@ -325,7 +324,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                 const element = this.selectItem(id)
                 if (this.props.onClickMenuItem) {
                     this.props.onClickMenuItem(this, {
-                        items: this.GetMenuItems(id),
+                        item: this.GetMenuItems(id),
                         path: this.GetPath(id),
                         element: element
                     })
@@ -470,7 +469,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                     this.props.onClickMenuItem(this, {
                         element: element,
                         path: listPath,
-                        items: listPath[listPath.length - 1]
+                        item: listPath[listPath.length - 1]
                     })
                 }
 

@@ -1,18 +1,45 @@
 import { TreeMenu } from "./treeMenu";
 import React from 'react';
 export type ParamsItems = {
+    /**
+     * Unique identifier, required
+     */
     id?: string;
+    /**
+     * Menu content
+     */
     content?: any;
+    /**
+     * The title global attribute  contains text representing advisory information
+     */
     title?: string;
+    /**
+     * Item icon ( use optional)
+     */
     icon?: any;
+    /**
+     * Status open submenu
+     */
     isOpen?: boolean;
+    /**
+     * url link (use optional)
+     */
     url?: (() => void) | string;
     style?: React.CSSProperties;
     className?: string;
     dataUser?: string;
     target?: string;
+    /**
+     * for use checkBox
+     */
     selected?: boolean;
+    /**
+     * Alt+ Shift+keys
+     */
     accessKey?: string;
+    /**
+     * children items ( use optional)
+     */
     items?: Array<MenuItem>;
 };
 export declare function CreateItem(p: ParamsItems): MenuItem;
@@ -54,6 +81,9 @@ export declare class MenuItem {
      * For internal use
      */
     ___isVisible?: boolean;
+    /**
+     * Alt+ Shift+keys
+     */
     accessKey?: string;
     constructor(content?: any, icon?: any);
     AddItem(...menuItem: MenuItem[]): this;
@@ -64,7 +94,7 @@ export declare class MenuItem {
 }
 export type ParamsClick = {
     path?: Array<MenuItem>;
-    items?: MenuItem;
+    item?: MenuItem;
     element?: HTMLAnchorElement;
 };
 export type TreeProps = {

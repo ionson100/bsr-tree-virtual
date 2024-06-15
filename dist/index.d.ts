@@ -2,18 +2,45 @@ import React from 'react';
 import { FixedSizeList } from 'react-window';
 
 type ParamsItems = {
+    /**
+     * Unique identifier, required
+     */
     id?: string;
+    /**
+     * Menu content
+     */
     content?: any;
+    /**
+     * The title global attribute  contains text representing advisory information
+     */
     title?: string;
+    /**
+     * Item icon ( use optional)
+     */
     icon?: any;
+    /**
+     * Status open submenu
+     */
     isOpen?: boolean;
+    /**
+     * url link (use optional)
+     */
     url?: (() => void) | string;
     style?: React.CSSProperties;
     className?: string;
     dataUser?: string;
     target?: string;
+    /**
+     * for use checkBox
+     */
     selected?: boolean;
+    /**
+     * Alt+ Shift+keys
+     */
     accessKey?: string;
+    /**
+     * children items ( use optional)
+     */
     items?: Array<MenuItem>;
 };
 declare function CreateItem(p: ParamsItems): MenuItem;
@@ -55,6 +82,9 @@ declare class MenuItem {
      * For internal use
      */
     ___isVisible?: boolean;
+    /**
+     * Alt+ Shift+keys
+     */
     accessKey?: string;
     constructor(content?: any, icon?: any);
     AddItem(...menuItem: MenuItem[]): this;
@@ -65,7 +95,7 @@ declare class MenuItem {
 }
 type ParamsClick = {
     path?: Array<MenuItem>;
-    items?: MenuItem;
+    item?: MenuItem;
     element?: HTMLAnchorElement;
 };
 type TreeProps = {
