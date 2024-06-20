@@ -207,17 +207,17 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         function getRootElement(item: MenuItem) {
             return <>
                 <div
-                    className={'inner-div-a'}
+                    className={'inner-div-a-v'}
                     data-root={1}
                     data-id={item.id}
                 >
                     {
-                        <div className={'tree-menu-item-right-image'}>{THIS.renderImageOpen(item)}</div>
+                        <div className={'tree-menu-item-right-image-v'}>{THIS.renderImageOpen(item)}</div>
                     }
 
                     {
                         THIS.props.useCheckBox ? (
-                            <div className={'tree-menu-check-host'} onClick={e => {
+                            <div className={'tree-menu-check-host-v'} onClick={e => {
                                 e.stopPropagation()
                             }}>
                                 <input type={"checkbox"} checked={item.selected}
@@ -228,11 +228,11 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                     }
                     {
                         item.icon ? (
-                            <div className={'tree-menu-item-left-image'}>{item.icon}</div>
+                            <div className={'tree-menu-item-left-image-v'}>{item.icon}</div>
                         ) : null
                     }
 
-                    <div className={'tree-menu-item-text t-over'}>{item.content}</div>
+                    <div className={'tree-menu-item-text-v t-over'}>{item.content}</div>
 
 
                 </div>
@@ -262,7 +262,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                 tabIndex={this.getTab()}
                 data-a-tree={1}
                 id={item.id}
-                className={item.className ? item.className : 'tree-menu-item'}
+                className={item.className ? item.className : 'tree-menu-item-v'}
                 onClick={this.clickItemNew}
                 key={item.id}>
 
@@ -502,18 +502,18 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
         function getItemElement(item: MenuItem) {
 
-            return <div className={'inner-div-a'} data-root={0} data-id={item.id}>
+            return <div className={'inner-div-a-v'} data-root={0} data-id={item.id}>
                 {
                     THIS.props.iconTree ? (
-                        <div className={'tree-menu-item-icon-tree'}>{THIS.props.iconTree}</div>
+                        <div className={'tree-menu-item-icon-tree-v'}>{THIS.props.iconTree}</div>
                     ) : null
                 }
                 {
-                    <div className={'tree-menu-item-right-image'}>{THIS.renderImageOpen(item)}</div>
+                    <div className={'tree-menu-item-right-image-v'}>{THIS.renderImageOpen(item)}</div>
                 }
                 {
                     THIS.props.useCheckBox ? (
-                        <div className={'tree-menu-check-host'} onClick={e => {
+                        <div className={'tree-menu-check-host-v'} onClick={e => {
                             e.stopPropagation()
                         }}>
                             <input type={"checkbox"} checked={item.selected}
@@ -525,11 +525,11 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                 }
                 {
                     item.icon ? (
-                        <div className={'tree-menu-item-left-image'}>{item.icon}</div>
+                        <div className={'tree-menu-item-left-image-v'}>{item.icon}</div>
                     ) : null
                 }
 
-                <div className={'tree-menu-item-text'}>{item.content}</div>
+                <div className={'tree-menu-item-text-v'}>{item.content}</div>
 
 
             </div>;
@@ -569,7 +569,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                 tabIndex={this.getTab()} data-a-tree={1}
                 id={item.id}
                 data-root={0}
-                className={item.className ? item.className : 'tree-menu-item'}
+                className={item.className ? item.className : 'tree-menu-item-v'}
                 onClick={this.clickItemNew}
                 key={item.id}>
 
@@ -593,7 +593,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
     render() {
 
         return (
-            <div ref={this.mRewHost} className={'tree-menu-host'}>
+            <div ref={this.mRewHost} className={'tree-menu-host-v'}>
                 <List
                     style={this.props.style}
                     ref={this.mRewList}
