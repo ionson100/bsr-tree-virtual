@@ -701,7 +701,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         this.RefreshMenu()
     }
 
-    public DeleteItems(id: string) {
+    public DeleteItem(id: string) {
 
         function recursionDelete(items: MenuItem[]|undefined) {
 

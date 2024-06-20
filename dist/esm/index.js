@@ -4279,7 +4279,7 @@ var TreeMenu = /** @class */ (function (_super) {
         (_a = this.ListItems).push.apply(_a, items);
         this.RefreshMenu();
     };
-    TreeMenu.prototype.DeleteItems = function (id) {
+    TreeMenu.prototype.DeleteItem = function (id) {
         function recursionDelete(items) {
             if (!items || items.length === 0)
                 return;

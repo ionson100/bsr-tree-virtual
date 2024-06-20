@@ -215,7 +215,7 @@ declare class TreeMenu extends React.Component<TreeProps, any> {
     GetMenuItems(id?: string): MenuItem | undefined;
     DeleteAllItems(callback?: () => void): void;
     RewriteItems(...items: MenuItem[]): void;
-    DeleteItems(id: string): void;
+    DeleteItem(id: string): void;
     GetFixedSizeList(): React.RefObject<FixedSizeList<any>>;
 }
 
