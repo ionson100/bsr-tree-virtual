@@ -3897,7 +3897,7 @@ var TreeMenu = /** @class */ (function (_super) {
         var nodeList = (_a = this.mRewHost.current) === null || _a === void 0 ? void 0 : _a.querySelectorAll("[data-tree-item]");
         if (nodeList) {
             nodeList.forEach(function (a) {
-                a.classList.remove('select-tree-item');
+                a.classList.remove('select-tree-item-v');
             });
         }
         var res = undefined;
@@ -3905,7 +3905,7 @@ var TreeMenu = /** @class */ (function (_super) {
         if (selectTarget) {
             selectTarget.forEach(function (a) {
                 res = a;
-                a.classList.add('select-tree-item');
+                a.classList.add('select-tree-item-v');
             });
         }
         return res;

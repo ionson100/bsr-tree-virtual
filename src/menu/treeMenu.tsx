@@ -149,7 +149,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         const nodeList = this.mRewHost.current?.querySelectorAll("[data-tree-item]")
         if (nodeList) {
             nodeList.forEach(a => {
-                a.classList.remove('select-tree-item')
+                a.classList.remove('select-tree-item-v')
             })
         }
 
@@ -158,7 +158,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         if (selectTarget) {
             selectTarget.forEach(a => {
                     res = a as HTMLAnchorElement
-                    a.classList.add('select-tree-item')
+                    a.classList.add('select-tree-item-v')
                 }
             );
         }
