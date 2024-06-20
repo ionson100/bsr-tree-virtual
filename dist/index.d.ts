@@ -153,6 +153,7 @@ type TreeProps = {
      * @param obj ParamsClick
      */
     onClickMenuItem?: (sender: InstanceType<typeof TreeMenu>, obj: ParamsClick) => void;
+    onChecked?: (sender: InstanceType<typeof TreeMenu>, item: MenuItem) => void;
 };
 declare class WrapperMenuItems {
     margin: number;
@@ -215,6 +216,7 @@ declare class TreeMenu extends React.Component<TreeProps, any> {
     DeleteAllItems(callback?: () => void): void;
     RewriteItems(...items: MenuItem[]): void;
     DeleteItems(id: string): void;
+    GetFixedSizeList(): React.RefObject<FixedSizeList<any>>;
 }
 
 export { CreateItem, MenuItem, type ParamsClick, type ParamsItems, TreeMenu, type VirtualSize, WrapperMenuItems };

@@ -152,6 +152,7 @@ export type TreeProps = {
      * @param obj ParamsClick
      */
     onClickMenuItem?: (sender: InstanceType<typeof TreeMenu>, obj: ParamsClick) => void;
+    onChecked?: (sender: InstanceType<typeof TreeMenu>, item: MenuItem) => void;
 };
 export declare class WrapperMenuItems {
     margin: number;

@@ -3813,6 +3813,9 @@ var TreeMenu = /** @class */ (function (_super) {
         menu.selected = e.target.checked;
         this.recursionSelect(menu, e.target.checked);
         (_a = this.mRewList.current) === null || _a === void 0 ? void 0 : _a.forceUpdate();
+        if (this.props.onChecked) {
+            this.props.onChecked(this, menu);
+        }
     };
     TreeMenu.prototype.wrapperFilter = function () {
         if (!this.wrapperItemsCore) {
@@ -4299,9 +4302,14 @@ var TreeMenu = /** @class */ (function (_super) {
         recursionDelete(this.ListItems);
         this.RefreshMenu();
     };
+    TreeMenu.prototype.GetFixedSizeList = function () {
+        return this.mRewList;
+    };
     TreeMenu.defaultProps = {
         className: 'host-menu',
         marginItem: 25,
+        wight: 200,
+        height: 200
     };
     return TreeMenu;
 }(React.Component));

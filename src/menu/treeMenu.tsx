@@ -9,6 +9,8 @@ export class TreeMenu extends React.Component<TreeProps, any> {
     static defaultProps: TreeProps = {
         className: 'host-menu',
         marginItem: 25,
+        wight:200,
+        height:200
     }
 
     private wrapperItems: Array<WrapperMenuItems>;
@@ -59,6 +61,9 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         menu.selected = e.target.checked
         this.recursionSelect(menu, e.target.checked)
         this.mRewList.current?.forceUpdate()
+        if(this.props.onChecked){
+            this.props.onChecked(this,menu);
+        }
     }
 
     private wrapperFilter(): Array<WrapperMenuItems> {
@@ -721,6 +726,12 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
         this.RefreshMenu()
     }
+
+    public GetFixedSizeList(){
+        return this.mRewList;
+
+    }
+
 
 
 }
