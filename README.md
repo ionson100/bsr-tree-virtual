@@ -12,14 +12,14 @@ npm install --save bsr-tree-virtual
 
 ## Usage
 
-```tsx
+```jsx
 import React from 'react';
 import {MdOutlineSubdirectoryArrowRight} from "react-icons/md";
 import {FaRegPlusSquare, FaRegMinusSquare} from "react-icons/fa";
 import {TreeMenu, MenuItem} from "bsr-tree-virtual"
 import "bsr-tree-virtual/dist/index.css"
 
-const listItem: Array<MenuItem> = []
+const listItem= []
 
 const m = new MenuItem('Root');
 m.AddItem(new MenuItem('sub_root')
@@ -41,12 +41,12 @@ function App() {
             items={listItem}
             marginItem={20}
             itemSize={33}
-            onClickMenuItem={(target,ob)=>{
+            onClickMenuItem={(tree,ob)=>{
                 console.log({
-                    text:ob.items!.content,
-                    id:ob.items!.id,
-                    isOpen:ob.items!.isOpen,
-                    isFinal:!ob.items!.items||ob.items!.items.length===0
+                    text:ob.item.content,
+                    id:ob.item.id,
+                    isOpen:ob.item.isOpen,
+                    isFinal:!ob.item.items||ob.item.items.length===0
                 })
             }}
         />
@@ -60,3 +60,7 @@ export default App;
 ## License
 
 MIT © [ionson100](https://github.com/ionson100)
+
+[Props, Function](https://ionson100.github.io/wwwroot/index.html#page=bsrtree).
+
+[Examples, Help pages](https://ionson100.github.io/wwwroot/index.html#page=5-1).
