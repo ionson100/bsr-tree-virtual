@@ -127,6 +127,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                 w.isVisible = item.___isVisible;
             }
             if(isVisible){
+
                 w.isVisible=true;
             }
             THIS.wrapperItems.push(w)
@@ -137,7 +138,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
             if (item && item.items && item.items.length > 0) {
 
                 item.items.forEach((a) => {
-                    actionWrapperRecursion(a, isRoot, margin,a.isOpen)
+                    actionWrapperRecursion(a, isRoot, margin,item.isOpen)
                 })
             }
         }

@@ -3889,12 +3889,12 @@ var TreeMenu = /** @class */ (function (_super) {
             }
             if (item && item.items && item.items.length > 0) {
                 item.items.forEach(function (a) {
-                    actionWrapperRecursion(a, isRoot, margin, a.isOpen === true);
+                    actionWrapperRecursion(a, isRoot, margin, item.isOpen === true);
                 });
             }
         }
         (_a = this.ListItems) === null || _a === void 0 ? void 0 : _a.forEach(function (a) {
-            actionWrapperRecursion(a, true, -1, a.isOpen === true);
+            actionWrapperRecursion(a, true, -1, a.isOpen);
         });
     };
     TreeMenu.prototype.selectItem = function (id) {
