@@ -4014,16 +4014,16 @@ var TreeMenu = /** @class */ (function (_super) {
         setTimeout(function () {
             _this.ListItems = _this.props.items;
             _this.actionWrapper();
-            if (_this.props.callbackVirtualSize) {
-                var vz = _this.props.callbackVirtualSize();
-                _this.wightVirtual = vz.wight;
-                _this.heightVirtual = vz.height;
-            }
             if (_this.props.height) {
                 _this.heightVirtual = _this.props.height;
             }
             if (_this.props.wight) {
                 _this.wightVirtual = _this.props.wight;
+            }
+            if (_this.props.callbackVirtualSize) {
+                var vz = _this.props.callbackVirtualSize();
+                _this.wightVirtual = vz.wight;
+                _this.heightVirtual = vz.height;
             }
             _this.wrapperItemsCore = undefined;
             _this.forceUpdate();

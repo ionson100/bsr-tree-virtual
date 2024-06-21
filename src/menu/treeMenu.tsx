@@ -341,16 +341,17 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         setTimeout(()=>{
             this.ListItems = this.props.items;
             this.actionWrapper()
-            if (this.props.callbackVirtualSize) {
-                const vz = this.props.callbackVirtualSize()
-                this.wightVirtual = vz.wight;
-                this.heightVirtual = vz.height
-            }
+
             if (this.props.height) {
                 this.heightVirtual = this.props.height
             }
             if (this.props.wight) {
                 this.wightVirtual = this.props.wight
+            }
+            if (this.props.callbackVirtualSize) {
+                const vz = this.props.callbackVirtualSize()
+                this.wightVirtual = vz.wight;
+                this.heightVirtual = vz.height
             }
             this.wrapperItemsCore = undefined;
             this.forceUpdate()
