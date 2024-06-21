@@ -20,15 +20,9 @@ export class TreeMenu extends React.Component<TreeProps, any> {
     private heightVirtual?: number
     private wightVirtual?: number
     private ListItems: Array<MenuItem> | undefined;
-
-
-
     private startTab: number;
-
     private accessKey?: string
     private blockKey: boolean = false;
-    //private selectHtmlElement?:HTMLElement=undefined
-
 
     constructor({props}: { props: Readonly<TreeProps> }) {
         super(props);
@@ -123,7 +117,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         this.wrapperItems = []
         const THIS = this;
 
-        function actionWrapperRecursion(item: MenuItem, isRoot: boolean, margin: number) {
+        function actionWrapperRecursion(item: MenuItem, isRoot: boolean, margin: number,isVisible?:boolean) {
 
             margin = margin + 1
             const w = new WrapperMenuItems({margin: margin, item: item, isRoot: isRoot});
@@ -131,6 +125,9 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                 w.isVisible = true;
             } else {
                 w.isVisible = item.___isVisible;
+            }
+            if(isVisible){
+                w.isVisible=true;
             }
             THIS.wrapperItems.push(w)
 
@@ -140,13 +137,13 @@ export class TreeMenu extends React.Component<TreeProps, any> {
             if (item && item.items && item.items.length > 0) {
 
                 item.items.forEach((a) => {
-                    actionWrapperRecursion(a, isRoot, margin)
+                    actionWrapperRecursion(a, isRoot, margin,a.isOpen)
                 })
             }
         }
 
         this.ListItems?.forEach(a => {
-            actionWrapperRecursion(a, true, -1)
+            actionWrapperRecursion(a, true, -1,a.isOpen)
         })
     }
 
@@ -380,7 +377,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         })
         this.actionWrapper()
         this.wrapperItemsCore = undefined;
-        //this.mRewList.current!.forceUpdate()
+
         this.forceUpdate(callback)
     }
 

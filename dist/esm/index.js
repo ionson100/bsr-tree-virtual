@@ -3781,7 +3781,6 @@ var FixedSizeList = /*#__PURE__*/createListComponent({
 
 var TreeMenu = /** @class */ (function (_super) {
     __extends(TreeMenu, _super);
-    //private selectHtmlElement?:HTMLElement=undefined
     function TreeMenu(_a) {
         var props = _a.props;
         var _this = _super.call(this, props) || this;
@@ -3872,7 +3871,7 @@ var TreeMenu = /** @class */ (function (_super) {
         var _a;
         this.wrapperItems = [];
         var THIS = this;
-        function actionWrapperRecursion(item, isRoot, margin) {
+        function actionWrapperRecursion(item, isRoot, margin, isVisible) {
             margin = margin + 1;
             var w = new WrapperMenuItems({ margin: margin, item: item, isRoot: isRoot });
             if (isRoot) {
@@ -3881,18 +3880,21 @@ var TreeMenu = /** @class */ (function (_super) {
             else {
                 w.isVisible = item.___isVisible;
             }
+            if (isVisible) {
+                w.isVisible = true;
+            }
             THIS.wrapperItems.push(w);
             if (isRoot) {
                 isRoot = false;
             }
             if (item && item.items && item.items.length > 0) {
                 item.items.forEach(function (a) {
-                    actionWrapperRecursion(a, isRoot, margin);
+                    actionWrapperRecursion(a, isRoot, margin, a.isOpen === true);
                 });
             }
         }
         (_a = this.ListItems) === null || _a === void 0 ? void 0 : _a.forEach(function (a) {
-            actionWrapperRecursion(a, true, -1);
+            actionWrapperRecursion(a, true, -1, a.isOpen === true);
         });
     };
     TreeMenu.prototype.selectItem = function (id) {
@@ -4045,7 +4047,6 @@ var TreeMenu = /** @class */ (function (_super) {
         });
         this.actionWrapper();
         this.wrapperItemsCore = undefined;
-        //this.mRewList.current!.forceUpdate()
         this.forceUpdate(callback);
     };
     TreeMenu.prototype.renderImageOpen = function (item) {
