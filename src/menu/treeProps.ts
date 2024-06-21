@@ -52,7 +52,7 @@ export function CreateItem(p: ParamsItems) {
     m.title = p.title;
     m.icon = p.icon;
     m.isOpen = p.isOpen ?? false;
-    m.target = p.target ?? '_self'
+    m.target = p.target
     m.url = p.url;
     m.style = p.style;
     m.className = p.className;
@@ -102,7 +102,7 @@ export class MenuItem {
     public style?: React.CSSProperties;
     public className?: string;
     public dataUser?: string
-    public target?: string = '_self'
+    public target?: string
     public selected?: boolean = false;
     /**
      * For internal use

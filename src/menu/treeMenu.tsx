@@ -223,7 +223,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                             <div className={'tree-menu-check-host-v'} onClick={e => {
                                 e.stopPropagation()
                             }}>
-                                <input type={"checkbox"} checked={item.selected}
+                                <input type={"checkbox"} tabIndex={-1} checked={item.selected}
                                        onChange={THIS.itemChecked}/>
                             </div>
                         ) : null
@@ -256,7 +256,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
                 title={item.title}
                 style={item.style}
-                target={item.target ? item.target : '_self'}
+                target={item.target}
                 data-user-tree={item.dataUser}
                 data-tree-item={1}
                 data-root={!item.icon ? '1' : undefined}
@@ -564,7 +564,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
                 title={item.title}
                 style={curStyle}
-                target={item.target ? item.target : '_self'}
+                target={item.target}
                 data-user-tree={item.dataUser}
                 onDragStart={this.noDrag}
                 href={innerUrl}
