@@ -43,10 +43,13 @@ export type ParamsItems = {
      * children items ( use optional)
      */
     items?: Array<MenuItem>
+
+    useCheckBox?:boolean
 }
 
 export function CreateItem(p: ParamsItems) {
     const m = new MenuItem();
+    m.useCheckBox=p.useCheckBox??false
     m.id = p.id ?? uuidv4();
     m.content = p.content;
     m.title = p.title;

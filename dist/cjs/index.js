@@ -101,21 +101,22 @@ function v4(options, buf, offset) {
 }
 
 function CreateItem(p) {
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e;
     var m = new MenuItem();
-    m.id = (_a = p.id) !== null && _a !== void 0 ? _a : v4();
+    m.useCheckBox = (_a = p.useCheckBox) !== null && _a !== void 0 ? _a : false;
+    m.id = (_b = p.id) !== null && _b !== void 0 ? _b : v4();
     m.content = p.content;
     m.title = p.title;
     m.icon = p.icon;
-    m.isOpen = (_b = p.isOpen) !== null && _b !== void 0 ? _b : false;
+    m.isOpen = (_c = p.isOpen) !== null && _c !== void 0 ? _c : false;
     m.target = p.target;
     m.url = p.url;
     m.style = p.style;
     m.className = p.className;
     m.dataUser = p.dataUser;
-    m.selected = (_c = p.selected) !== null && _c !== void 0 ? _c : false;
+    m.selected = (_d = p.selected) !== null && _d !== void 0 ? _d : false;
     m.accessKey = p.accessKey;
-    m.items = (_d = p.items) !== null && _d !== void 0 ? _d : [];
+    m.items = (_e = p.items) !== null && _e !== void 0 ? _e : [];
     return m;
 }
 var MenuItem = /** @class */ (function () {

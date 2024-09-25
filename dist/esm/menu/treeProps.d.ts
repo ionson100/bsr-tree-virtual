@@ -41,6 +41,7 @@ export type ParamsItems = {
      * children items ( use optional)
      */
     items?: Array<MenuItem>;
+    useCheckBox?: boolean;
 };
 export declare function CreateItem(p: ParamsItems): MenuItem;
 export declare class MenuItem {
