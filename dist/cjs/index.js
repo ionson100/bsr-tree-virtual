@@ -120,6 +120,7 @@ function CreateItem(p) {
 }
 var MenuItem = /** @class */ (function () {
     function MenuItem(content, icon) {
+        this.useCheckBox = false;
         /**
          * Unique identifier, required
          */
@@ -3813,8 +3814,9 @@ var TreeMenu = /** @class */ (function (_super) {
         menu.selected = e.target.checked;
         this.recursionSelect(menu, e.target.checked);
         (_a = this.mRewList.current) === null || _a === void 0 ? void 0 : _a.forceUpdate();
+        var path = this.GetPath(menu.id);
         if (this.props.onChecked) {
-            this.props.onChecked(this, menu);
+            this.props.onChecked(this, menu, path);
         }
     };
     TreeMenu.prototype.wrapperFilter = function () {
@@ -4156,7 +4158,7 @@ var TreeMenu = /** @class */ (function (_super) {
             return React.createElement("div", { className: 'inner-div-a-v', "data-root": 0, "data-id": item.id },
                 THIS.props.iconTree ? (React.createElement("div", { className: 'tree-menu-item-icon-tree-v' }, THIS.props.iconTree)) : null,
                 React.createElement("div", { className: 'tree-menu-item-right-image-v' }, THIS.renderImageOpen(item)),
-                THIS.props.useCheckBox ? (React.createElement("div", { className: 'tree-menu-check-host-v', onClick: function (e) {
+                THIS.props.useCheckBox || item.useCheckBox ? (React.createElement("div", { className: 'tree-menu-check-host-v', onClick: function (e) {
                         e.stopPropagation();
                     } },
                     React.createElement("input", { type: "checkbox", checked: item.selected, onChange: THIS.itemChecked }))) : null,

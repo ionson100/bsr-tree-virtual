@@ -67,6 +67,7 @@ export function CreateItem(p: ParamsItems) {
 
 export class MenuItem {
 
+    public useCheckBox: boolean = false;
     /**
      * Unique identifier, required
      */
@@ -207,7 +208,7 @@ export type TreeProps = {
      */
     onClickMenuItem?: (sender: InstanceType<typeof TreeMenu>, obj: ParamsClick) => void
 
-    onChecked?:(sender: InstanceType<typeof TreeMenu>,item:MenuItem)=>void
+    onChecked?:(sender: InstanceType<typeof TreeMenu>,item:MenuItem,path?: Array<MenuItem>)=>void
 }
 
 export class WrapperMenuItems {

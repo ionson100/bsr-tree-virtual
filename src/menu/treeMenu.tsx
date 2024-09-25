@@ -55,8 +55,9 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         menu.selected = e.target.checked
         this.recursionSelect(menu, e.target.checked)
         this.mRewList.current?.forceUpdate()
+        const path=this.GetPath(menu.id)
         if(this.props.onChecked){
-            this.props.onChecked(this,menu);
+            this.props.onChecked(this,menu,path);
         }
     }
 
@@ -516,7 +517,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                     <div className={'tree-menu-item-right-image-v'}>{THIS.renderImageOpen(item)}</div>
                 }
                 {
-                    THIS.props.useCheckBox ? (
+                    THIS.props.useCheckBox||item.useCheckBox ? (
                         <div className={'tree-menu-check-host-v'} onClick={e => {
                             e.stopPropagation()
                         }}>

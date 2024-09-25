@@ -44,6 +44,7 @@ export type ParamsItems = {
 };
 export declare function CreateItem(p: ParamsItems): MenuItem;
 export declare class MenuItem {
+    useCheckBox: boolean;
     /**
      * Unique identifier, required
      */
@@ -152,7 +153,7 @@ export type TreeProps = {
      * @param obj ParamsClick
      */
     onClickMenuItem?: (sender: InstanceType<typeof TreeMenu>, obj: ParamsClick) => void;
-    onChecked?: (sender: InstanceType<typeof TreeMenu>, item: MenuItem) => void;
+    onChecked?: (sender: InstanceType<typeof TreeMenu>, item: MenuItem, path?: Array<MenuItem>) => void;
 };
 export declare class WrapperMenuItems {
     margin: number;
