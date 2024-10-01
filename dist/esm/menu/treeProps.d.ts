@@ -101,6 +101,10 @@ export type ParamsClick = {
 };
 export type TreeProps = {
     /**
+     * Rules for opening the items menu
+     */
+    ruleOpen?: boolean;
+    /**
      * Approximate height of element item default 35
      */
     itemSize?: number;

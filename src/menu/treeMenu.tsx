@@ -9,8 +9,8 @@ export class TreeMenu extends React.Component<TreeProps, any> {
     static defaultProps: TreeProps = {
         className: 'host-menu',
         marginItem: 25,
-        wight:200,
-        height:200
+        wight: 200,
+        height: 200
     }
 
     private wrapperItems: Array<WrapperMenuItems>;
@@ -55,9 +55,9 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         menu.selected = e.target.checked
         this.recursionSelect(menu, e.target.checked)
         this.mRewList.current?.forceUpdate()
-        const path=this.GetPath(menu.id)
-        if(this.props.onChecked){
-            this.props.onChecked(this,menu,path);
+        const path = this.GetPath(menu.id)
+        if (this.props.onChecked) {
+            this.props.onChecked(this, menu, path);
         }
     }
 
@@ -101,11 +101,11 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         //         this.selectHtmlElement=undefined;
         //     }
         // }
-        if(e.key==="Enter"){//&&this.selectHtmlElement
-            const  dd=document.activeElement;
-            if(dd){
-                if(dd.getAttribute("data-tree-item")){
-                    const  d=dd as HTMLElement;
+        if (e.key === "Enter") {//&&this.selectHtmlElement
+            const dd = document.activeElement;
+            if (dd) {
+                if (dd.getAttribute("data-tree-item")) {
+                    const d = dd as HTMLElement;
                     d.click()
                 }
             }
@@ -118,7 +118,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         this.wrapperItems = []
         const THIS = this;
 
-        function actionWrapperRecursion(item: MenuItem, isRoot: boolean, margin: number,isVisible?:boolean) {
+        function actionWrapperRecursion(item: MenuItem, isRoot: boolean, margin: number, isVisible?: boolean) {
 
             margin = margin + 1
             const w = new WrapperMenuItems({margin: margin, item: item, isRoot: isRoot});
@@ -127,9 +127,9 @@ export class TreeMenu extends React.Component<TreeProps, any> {
             } else {
                 w.isVisible = item.___isVisible;
             }
-            if(isVisible){
+            if (isVisible) {
 
-                w.isVisible=true;
+                w.isVisible = true;
             }
             THIS.wrapperItems.push(w)
 
@@ -139,13 +139,13 @@ export class TreeMenu extends React.Component<TreeProps, any> {
             if (item && item.items && item.items.length > 0) {
 
                 item.items.forEach((a) => {
-                    actionWrapperRecursion(a, isRoot, margin,item.isOpen)
+                    actionWrapperRecursion(a, isRoot, margin, item.isOpen)
                 })
             }
         }
 
         this.ListItems?.forEach(a => {
-            actionWrapperRecursion(a, true, -1,a.isOpen)
+            actionWrapperRecursion(a, true, -1, a.isOpen)
         })
     }
 
@@ -253,31 +253,128 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
 
         return (
-            <a
+            <div style={{display: "flex"}}>
+                {
+                    this.props.ruleOpen?(
+                        <div
+                            className={'inner-div-a-v'}
+                            data-root={1}
+                            data-id={item.id}
+                        >
+                            {
+                                <div className={'tree-menu-item-right-image-v'} data-icon={item.id}
+                                     onClick={(e) => {
+                                         this.ClickIcon(e)
+                                     }}
 
-                title={item.title}
-                style={item.style}
-                target={item.target}
-                data-user-tree={item.dataUser}
-                data-tree-item={1}
-                data-root={!item.icon ? '1' : undefined}
-                onDragStart={this.noDrag}
-                href={innerUrl}
-                tabIndex={this.getTab()}
-                data-a-tree={1}
-                id={item.id}
-                className={item.className ? item.className : 'tree-menu-item-v'}
-                onClick={this.clickItemNew}
-                key={item.id}>
+                                >{THIS.renderImageOpen(item)}</div>
+                            }
 
-                {getRootElement(item)}
-            </a>
+                            {
+                                THIS.props.useCheckBox ? (
+                                    <div className={'tree-menu-check-host-v'} onClick={e => {
+                                        e.stopPropagation()
+                                    }}>
+                                        <input type={"checkbox"} tabIndex={-1} checked={item.selected}
+                                               onChange={THIS.itemChecked}/>
+                                    </div>
+                                ) : null
+
+                            }
+                            {
+                                item.icon ? (
+                                    <div className={'tree-menu-item-left-image-v'}>{item.icon}</div>
+                                ) : null
+                            }
+
+
+                        </div>
+                    ):null
+                }
+
+                <a
+
+                    title={item.title}
+                    style={item.style}
+                    target={item.target}
+                    data-user-tree={item.dataUser}
+                    data-tree-item={1}
+                    data-root={!item.icon ? '1' : undefined}
+                    onDragStart={this.noDrag}
+                    href={innerUrl}
+                    tabIndex={this.getTab()}
+                    data-a-tree={1}
+                    id={item.id}
+                    className={item.className ? item.className : 'tree-menu-item-v'}
+                    onClick={this.clickItemNew}
+                    key={item.id}>
+
+                    {
+                        this.props.ruleOpen?(<div className={'tree-menu-item-text-v t-over'}>{item.content}</div>): getRootElement(item)
+                    }
+
+                </a>
+            </div>
+
 
         )
     }
 
+    private ClickIcon(e: React.MouseEvent<HTMLDivElement>) {
+
+        function visible(item: MenuItem) {
+            item.__wrapper!.isVisible = true;
+            if (item.isOpen) {
+                if (item.items) {
+                    item.items.forEach(a => {
+                        visible(a)
+                    })
+                }
+            }
+
+
+        }
+
+        function notVisible(item: MenuItem) {
+            item.__wrapper!.isVisible = false;
+            if (item.items) {
+                item.items.forEach(a => {
+                    notVisible(a)
+                })
+            }
+        }
+
+        e.stopPropagation();
+        //this.selectHtmlElement=e.target as HTMLElement
+
+
+        const id = e.currentTarget.getAttribute('data-icon')
+
+        if (!id) return;
+        const menu = this.GetMenuItems(id)
+        if (!menu) return
+        if (!menu.isOpen) {
+            menu.items!.forEach(a => {
+                visible(a)
+            })
+            menu.isOpen = true;
+        } else {
+            menu.items!.forEach(a => {
+                notVisible(a)
+            })
+            menu.isOpen = false;
+        }
+
+        this.wrapperItemsCore = undefined
+
+        this.forceUpdate(() => {
+
+        })
+    }
+
 
     private clickItemNew(e: React.MouseEvent<HTMLAnchorElement>) {
+
 
         function visible(item: MenuItem) {
             item.__wrapper!.isVisible = true;
@@ -307,19 +404,22 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
         const id = e.currentTarget.getAttribute('id')
         if (!id) return;
-        const menu = this.GetMenuItems(id)
-        if (!menu) return
-        if (!menu.isOpen) {
-            menu.items!.forEach(a => {
-                visible(a)
-            })
-            menu.isOpen = true;
-        } else {
-            menu.items!.forEach(a => {
-                notVisible(a)
-            })
-            menu.isOpen = false;
+        if(!this.props.ruleOpen){
+            const menu = this.GetMenuItems(id)
+            if (!menu) return
+            if (!menu.isOpen) {
+                menu.items!.forEach(a => {
+                    visible(a)
+                })
+                menu.isOpen = true;
+            } else {
+                menu.items!.forEach(a => {
+                    notVisible(a)
+                })
+                menu.isOpen = false;
+            }
         }
+
 
         this.wrapperItemsCore = undefined
 
@@ -339,7 +439,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
     componentDidMount() {
         window.addEventListener("keyup", this.keyTabEnter) //todo remove
-        setTimeout(()=>{
+        setTimeout(() => {
             this.ListItems = this.props.items;
             this.actionWrapper()
 
@@ -359,7 +459,6 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         })
 
 
-
     }
 
     private getTab() {
@@ -371,9 +470,9 @@ export class TreeMenu extends React.Component<TreeProps, any> {
     }
 
     public RefreshMenu(callback?: () => void): void {
-        if(!this.wrapperItems||!this.wrapperItemsCore) return
-        this.wrapperItems.forEach(a=>{
-            a.item.___isVisible=false;
+        if (!this.wrapperItems || !this.wrapperItemsCore) return
+        this.wrapperItems.forEach(a => {
+            a.item.___isVisible = false;
         })
         this.wrapperItemsCore.forEach(a => {
             a.item.___isVisible = true
@@ -507,51 +606,62 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
         function getItemElement(item: MenuItem) {
 
-            return <div className={'inner-div-a-v'} data-root={0} data-id={item.id}>
-                {
-                    THIS.props.iconTree ? (
-                        <div className={'tree-menu-item-icon-tree-v'}>{THIS.props.iconTree}</div>
-                    ) : null
-                }
-                {
-                    <div className={'tree-menu-item-right-image-v'}>{THIS.renderImageOpen(item)}</div>
-                }
-                {
-                    THIS.props.useCheckBox||item.useCheckBox ? (
-                        <div className={'tree-menu-check-host-v'} onClick={e => {
-                            e.stopPropagation()
-                        }}>
-                            <input type={"checkbox"} checked={item.selected}
-                                   onChange={THIS.itemChecked}/>
-                        </div>
-                    ) : null
+            return (
+                <div className={'inner-div-a-v'} data-root={0} data-id={item.id}>
+                    {
+                        THIS.props.iconTree ? (
+                            <div className={'tree-menu-item-icon-tree-v'}>{THIS.props.iconTree}</div>
+                        ) : null
+                    }
+                    {
+                        <div className={'tree-menu-item-right-image-v'}>{THIS.renderImageOpen(item)}</div>
+                    }
+                    {
+                        THIS.props.useCheckBox || item.useCheckBox ? (
+                            <div className={'tree-menu-check-host-v'} onClick={e => {
+                                e.stopPropagation()
+                            }}>
+                                <input type={"checkbox"} checked={item.selected}
+                                       onChange={THIS.itemChecked}/>
+                            </div>
+                        ) : null
 
 
-                }
-                {
-                    item.icon ? (
-                        <div className={'tree-menu-item-left-image-v'}>{item.icon}</div>
-                    ) : null
-                }
+                    }
+                    {
+                        item.icon ? (
+                            <div className={'tree-menu-item-left-image-v'}>{item.icon}</div>
+                        ) : null
+                    }
 
-                <div className={'tree-menu-item-text-v'}>{item.content}</div>
+                    <div className={'tree-menu-item-text-v'}>{item.content}</div>
 
 
-            </div>;
+                </div>
+            )
+
         }
 
-        // if ((!item.items || item.items.length ===1)&&this.props.iconTree) {
-        //     padding = 0
-        // }
+
 
         let curStyle: React.CSSProperties | undefined
-        curStyle = {marginLeft: padding * this.props.marginItem}
+
+        if(this.props.ruleOpen){
+            curStyle = {marginLeft: 0}
+        }else{
+            curStyle = {marginLeft: padding * this.props.marginItem}
+        }
+
+        //
         if (item.style) {
 
             curStyle = item.style
-            if (!curStyle.marginLeft) {
-                curStyle.marginLeft = padding * this.props.marginItem
+            if(this.props.ruleOpen){
+                if (!curStyle.marginLeft) {
+                    curStyle.marginLeft = padding * this.props.marginItem
+                }
             }
+
         }
 
         let innerUrl: string | undefined = undefined
@@ -562,24 +672,68 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         }
 
         return (
-            <a
 
-                title={item.title}
-                style={curStyle}
-                target={item.target}
-                data-user-tree={item.dataUser}
-                onDragStart={this.noDrag}
-                href={innerUrl}
-                data-tree-item={1}
-                tabIndex={this.getTab()} data-a-tree={1}
-                id={item.id}
-                data-root={0}
-                className={item.className ? item.className : 'tree-menu-item-v'}
-                onClick={this.clickItemNew}
-                key={item.id}>
 
-                {getItemElement(item)}
-            </a>
+            <div style={{display:"flex"}}>
+                {
+                    this.props.ruleOpen?( <div className={'inner-div-a-v'} data-root={0} data-id={item.id} style={{marginLeft: padding * this.props.marginItem-3}}>
+                        {
+                            THIS.props.iconTree ? (
+                                <div className={'tree-menu-item-icon-tree-v'}>{THIS.props.iconTree}</div>
+                            ) : null
+                        }
+                        {
+                            <div className={'tree-menu-item-right-image-v'}
+
+                                 data-icon={item.id}
+                                 onClick={(e) => {
+                                     this.ClickIcon(e)
+                                 }}
+                            >{THIS.renderImageOpen(item)}</div>
+                        }
+                        {
+                            THIS.props.useCheckBox || item.useCheckBox ? (
+                                <div className={'tree-menu-check-host-v'} onClick={e => {
+                                    e.stopPropagation()
+                                }}>
+                                    <input type={"checkbox"} checked={item.selected}
+                                           onChange={THIS.itemChecked}/>
+                                </div>
+                            ) : null
+
+
+                        }
+                        {
+                            item.icon ? (
+                                <div className={'tree-menu-item-left-image-v'}>{item.icon}</div>
+                            ) : null
+                        }
+                    </div>):null
+                }
+
+                <a
+
+                    title={item.title}
+                    style={curStyle}
+                    target={item.target}
+                    data-user-tree={item.dataUser}
+                    onDragStart={this.noDrag}
+                    href={innerUrl}
+                    data-tree-item={1}
+                    tabIndex={this.getTab()} data-a-tree={1}
+                    id={item.id}
+                    data-root={0}
+                    className={item.className ? item.className : 'tree-menu-item-v'}
+                    onClick={this.clickItemNew}
+                    key={item.id}>
+                    {
+                        this.props.ruleOpen ?
+                            <div className={'tree-menu-item-text-v'}>{item.content}</div> : getItemElement(item)
+                    }
+
+                </a>
+            </div>
+
         )
     }
 
@@ -605,7 +759,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                     itemData={this.wrapperFilter()}
                     height={this.heightVirtual ?? 1000}
                     itemCount={this.wrapperFilter().length}
-                    itemSize={this.props.itemSize??35}
+                    itemSize={this.props.itemSize ?? 35}
                     width={this.wightVirtual ?? 1000}
                 >
                     {this.Row}
@@ -703,35 +857,35 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
     public DeleteItem(id: string) {
 
-        function recursionDelete(items: MenuItem[]|undefined) {
+        function recursionDelete(items: MenuItem[] | undefined) {
 
-            if(!items||items.length===0) return
-            let index=-1
+            if (!items || items.length === 0) return
+            let index = -1
             for (let i = 0; i < items.length; i++) {
-                if(items[i].id===id){
-                    index=i;
+                if (items[i].id === id) {
+                    index = i;
                     break;
                 }
             }
-            if(index!==-1){
+            if (index !== -1) {
 
-                items.splice(index,1)
-            }else{
-                items.forEach(a=>{
+                items.splice(index, 1)
+            } else {
+                items.forEach(a => {
                     recursionDelete(a.items)
                 })
             }
         }
+
         recursionDelete(this.ListItems)
 
         this.RefreshMenu()
     }
 
-    public GetFixedSizeList(){
+    public GetFixedSizeList() {
         return this.mRewList;
 
     }
-
 
 
 }

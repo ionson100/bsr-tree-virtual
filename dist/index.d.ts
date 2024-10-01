@@ -102,6 +102,10 @@ type ParamsClick = {
 };
 type TreeProps = {
     /**
+     * Rules for opening the items menu
+     */
+    ruleOpen?: boolean;
+    /**
      * Approximate height of element item default 35
      */
     itemSize?: number;
@@ -196,6 +200,7 @@ declare class TreeMenu extends React.Component<TreeProps, any> {
     private selectItem;
     private Row;
     private renderRoot;
+    private ClickIcon;
     private clickItemNew;
     componentDidMount(): void;
     private getTab;
