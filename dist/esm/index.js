@@ -3935,6 +3935,7 @@ var TreeMenu = /** @class */ (function (_super) {
         }
     };
     TreeMenu.prototype.renderRoot = function (item) {
+        var _this = this;
         var THIS = this;
         function getRootElement(item) {
             return React.createElement(React.Fragment, null,
@@ -3954,7 +3955,60 @@ var TreeMenu = /** @class */ (function (_super) {
                 innerUrl = item.url;
             }
         }
-        return (React.createElement("a", { title: item.title, style: item.style, target: item.target, "data-user-tree": item.dataUser, "data-tree-item": 1, "data-root": !item.icon ? '1' : undefined, onDragStart: this.noDrag, href: innerUrl, tabIndex: this.getTab(), "data-a-tree": 1, id: item.id, className: item.className ? item.className : 'tree-menu-item-v', onClick: this.clickItemNew, key: item.id }, getRootElement(item)));
+        return (React.createElement("div", { style: { display: "flex" } },
+            this.props.ruleOpen ? (React.createElement("div", { className: 'inner-div-a-v', "data-root": 1, "data-id": item.id },
+                React.createElement("div", { className: 'tree-menu-item-right-image-v', "data-icon": item.id, onClick: function (e) {
+                        _this.ClickIcon(e);
+                    } }, THIS.renderImageOpen(item)),
+                THIS.props.useCheckBox ? (React.createElement("div", { className: 'tree-menu-check-host-v', onClick: function (e) {
+                        e.stopPropagation();
+                    } },
+                    React.createElement("input", { type: "checkbox", tabIndex: -1, checked: item.selected, onChange: THIS.itemChecked }))) : null,
+                item.icon ? (React.createElement("div", { className: 'tree-menu-item-left-image-v' }, item.icon)) : null)) : null,
+            React.createElement("a", { title: item.title, style: item.style, target: item.target, "data-user-tree": item.dataUser, "data-tree-item": 1, "data-root": !item.icon ? '1' : undefined, onDragStart: this.noDrag, href: innerUrl, tabIndex: this.getTab(), "data-a-tree": 1, id: item.id, className: item.className ? item.className : 'tree-menu-item-v', onClick: this.clickItemNew, key: item.id }, this.props.ruleOpen ? (React.createElement("div", { className: 'tree-menu-item-text-v t-over' }, item.content)) : getRootElement(item))));
+    };
+    TreeMenu.prototype.ClickIcon = function (e) {
+        function visible(item) {
+            item.__wrapper.isVisible = true;
+            if (item.isOpen) {
+                if (item.items) {
+                    item.items.forEach(function (a) {
+                        visible(a);
+                    });
+                }
+            }
+        }
+        function notVisible(item) {
+            item.__wrapper.isVisible = false;
+            if (item.items) {
+                item.items.forEach(function (a) {
+                    notVisible(a);
+                });
+            }
+        }
+        e.stopPropagation();
+        //this.selectHtmlElement=e.target as HTMLElement
+        var id = e.currentTarget.getAttribute('data-icon');
+        if (!id)
+            return;
+        var menu = this.GetMenuItems(id);
+        if (!menu)
+            return;
+        if (!menu.isOpen) {
+            menu.items.forEach(function (a) {
+                visible(a);
+            });
+            menu.isOpen = true;
+        }
+        else {
+            menu.items.forEach(function (a) {
+                notVisible(a);
+            });
+            menu.isOpen = false;
+        }
+        this.wrapperItemsCore = undefined;
+        this.forceUpdate(function () {
+        });
     };
     TreeMenu.prototype.clickItemNew = function (e) {
         var _this = this;
@@ -3981,20 +4035,22 @@ var TreeMenu = /** @class */ (function (_super) {
         var id = e.currentTarget.getAttribute('id');
         if (!id)
             return;
-        var menu = this.GetMenuItems(id);
-        if (!menu)
-            return;
-        if (!menu.isOpen) {
-            menu.items.forEach(function (a) {
-                visible(a);
-            });
-            menu.isOpen = true;
-        }
-        else {
-            menu.items.forEach(function (a) {
-                notVisible(a);
-            });
-            menu.isOpen = false;
+        if (!this.props.ruleOpen) {
+            var menu = this.GetMenuItems(id);
+            if (!menu)
+                return;
+            if (!menu.isOpen) {
+                menu.items.forEach(function (a) {
+                    visible(a);
+                });
+                menu.isOpen = true;
+            }
+            else {
+                menu.items.forEach(function (a) {
+                    notVisible(a);
+                });
+                menu.isOpen = false;
+            }
         }
         this.wrapperItemsCore = undefined;
         this.forceUpdate(function () {
@@ -4152,9 +4208,10 @@ var TreeMenu = /** @class */ (function (_super) {
         }));
     };
     TreeMenu.prototype.renderItem = function (item, padding) {
+        var _this = this;
         var THIS = this;
         function getItemElement(item) {
-            return React.createElement("div", { className: 'inner-div-a-v', "data-root": 0, "data-id": item.id },
+            return (React.createElement("div", { className: 'inner-div-a-v', "data-root": 0, "data-id": item.id },
                 THIS.props.iconTree ? (React.createElement("div", { className: 'tree-menu-item-icon-tree-v' }, THIS.props.iconTree)) : null,
                 React.createElement("div", { className: 'tree-menu-item-right-image-v' }, THIS.renderImageOpen(item)),
                 THIS.props.useCheckBox || item.useCheckBox ? (React.createElement("div", { className: 'tree-menu-check-host-v', onClick: function (e) {
@@ -4162,17 +4219,22 @@ var TreeMenu = /** @class */ (function (_super) {
                     } },
                     React.createElement("input", { type: "checkbox", checked: item.selected, onChange: THIS.itemChecked }))) : null,
                 item.icon ? (React.createElement("div", { className: 'tree-menu-item-left-image-v' }, item.icon)) : null,
-                React.createElement("div", { className: 'tree-menu-item-text-v' }, item.content));
+                React.createElement("div", { className: 'tree-menu-item-text-v' }, item.content)));
         }
-        // if ((!item.items || item.items.length ===1)&&this.props.iconTree) {
-        //     padding = 0
-        // }
         var curStyle;
-        curStyle = { marginLeft: padding * this.props.marginItem };
+        if (this.props.ruleOpen) {
+            curStyle = { marginLeft: 0 };
+        }
+        else {
+            curStyle = { marginLeft: padding * this.props.marginItem };
+        }
+        //
         if (item.style) {
             curStyle = item.style;
-            if (!curStyle.marginLeft) {
-                curStyle.marginLeft = padding * this.props.marginItem;
+            if (this.props.ruleOpen) {
+                if (!curStyle.marginLeft) {
+                    curStyle.marginLeft = padding * this.props.marginItem;
+                }
             }
         }
         var innerUrl = undefined;
@@ -4181,7 +4243,19 @@ var TreeMenu = /** @class */ (function (_super) {
                 innerUrl = item.url;
             }
         }
-        return (React.createElement("a", { title: item.title, style: curStyle, target: item.target, "data-user-tree": item.dataUser, onDragStart: this.noDrag, href: innerUrl, "data-tree-item": 1, tabIndex: this.getTab(), "data-a-tree": 1, id: item.id, "data-root": 0, className: item.className ? item.className : 'tree-menu-item-v', onClick: this.clickItemNew, key: item.id }, getItemElement(item)));
+        return (React.createElement("div", { style: { display: "flex" } },
+            this.props.ruleOpen ? (React.createElement("div", { className: 'inner-div-a-v', "data-root": 0, "data-id": item.id, style: { marginLeft: padding * this.props.marginItem - 3 } },
+                THIS.props.iconTree ? (React.createElement("div", { className: 'tree-menu-item-icon-tree-v' }, THIS.props.iconTree)) : null,
+                React.createElement("div", { className: 'tree-menu-item-right-image-v', "data-icon": item.id, onClick: function (e) {
+                        _this.ClickIcon(e);
+                    } }, THIS.renderImageOpen(item)),
+                THIS.props.useCheckBox || item.useCheckBox ? (React.createElement("div", { className: 'tree-menu-check-host-v', onClick: function (e) {
+                        e.stopPropagation();
+                    } },
+                    React.createElement("input", { type: "checkbox", checked: item.selected, onChange: THIS.itemChecked }))) : null,
+                item.icon ? (React.createElement("div", { className: 'tree-menu-item-left-image-v' }, item.icon)) : null)) : null,
+            React.createElement("a", { title: item.title, style: curStyle, target: item.target, "data-user-tree": item.dataUser, onDragStart: this.noDrag, href: innerUrl, "data-tree-item": 1, tabIndex: this.getTab(), "data-a-tree": 1, id: item.id, "data-root": 0, className: item.className ? item.className : 'tree-menu-item-v', onClick: this.clickItemNew, key: item.id }, this.props.ruleOpen ?
+                React.createElement("div", { className: 'tree-menu-item-text-v' }, item.content) : getItemElement(item))));
     };
     TreeMenu.prototype.recursionSelect = function (menu, value) {
         var _this = this;

@@ -23,6 +23,7 @@ export declare class TreeMenu extends React.Component<TreeProps, any> {
     private selectItem;
     private Row;
     private renderRoot;
+    private ClickIcon;
     private clickItemNew;
     componentDidMount(): void;
     private getTab;
