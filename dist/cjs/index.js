@@ -4230,15 +4230,31 @@ var TreeMenu = /** @class */ (function (_super) {
         else {
             curStyle = { marginLeft: padding * this.props.marginItem };
         }
-        //
+        //alert(padding * this.props.marginItem)
         if (item.style) {
             curStyle = item.style;
-            if (this.props.ruleOpen) {
-                if (!curStyle.marginLeft) {
+            if (!curStyle.marginLeft) {
+                if (this.props.ruleOpen) {
+                    curStyle.marginLeft = padding;
+                }
+                else {
                     curStyle.marginLeft = padding * this.props.marginItem;
                 }
             }
         }
+        // if (item.style) {
+        //
+        //     curStyle = item.style
+        //     if (this.props.ruleOpen) {
+        //         if (!curStyle.marginLeft) {
+        //
+        //         }
+        //     }else{
+        //         //alert(JSON.stringify(curStyle));
+        //         curStyle = {marginLeft: padding * this.props.marginItem}
+        //     }
+        //
+        // }
         var innerUrl = undefined;
         if (item.url) {
             if (typeof (item.url) !== 'function') {

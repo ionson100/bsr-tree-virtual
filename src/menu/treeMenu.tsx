@@ -255,7 +255,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         return (
             <div style={{display: "flex"}}>
                 {
-                    this.props.ruleOpen?(
+                    this.props.ruleOpen ? (
                         <div
                             className={'inner-div-a-v'}
                             data-root={1}
@@ -289,7 +289,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
 
                         </div>
-                    ):null
+                    ) : null
                 }
 
                 <a
@@ -310,7 +310,8 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                     key={item.id}>
 
                     {
-                        this.props.ruleOpen?(<div className={'tree-menu-item-text-v t-over'}>{item.content}</div>): getRootElement(item)
+                        this.props.ruleOpen ? (
+                            <div className={'tree-menu-item-text-v t-over'}>{item.content}</div>) : getRootElement(item)
                     }
 
                 </a>
@@ -404,7 +405,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
 
         const id = e.currentTarget.getAttribute('id')
         if (!id) return;
-        if(!this.props.ruleOpen){
+        if (!this.props.ruleOpen) {
             const menu = this.GetMenuItems(id)
             if (!menu) return
             if (!menu.isOpen) {
@@ -643,26 +644,42 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         }
 
 
-
         let curStyle: React.CSSProperties | undefined
 
-        if(this.props.ruleOpen){
+        if (this.props.ruleOpen) {
             curStyle = {marginLeft: 0}
-        }else{
+        } else {
             curStyle = {marginLeft: padding * this.props.marginItem}
         }
+        //alert(padding * this.props.marginItem)
 
-        //
         if (item.style) {
 
             curStyle = item.style
-            if(this.props.ruleOpen){
-                if (!curStyle.marginLeft) {
+            if (!curStyle.marginLeft) {
+                if (this.props.ruleOpen){
+                    curStyle.marginLeft = padding
+                } else {
                     curStyle.marginLeft = padding * this.props.marginItem
                 }
-            }
 
+            }
         }
+
+
+        // if (item.style) {
+        //
+        //     curStyle = item.style
+        //     if (this.props.ruleOpen) {
+        //         if (!curStyle.marginLeft) {
+        //
+        //         }
+        //     }else{
+        //         //alert(JSON.stringify(curStyle));
+        //         curStyle = {marginLeft: padding * this.props.marginItem}
+        //     }
+        //
+        // }
 
         let innerUrl: string | undefined = undefined
         if (item.url) {
@@ -674,9 +691,10 @@ export class TreeMenu extends React.Component<TreeProps, any> {
         return (
 
 
-            <div style={{display:"flex"}}>
+            <div style={{display: "flex"}}>
                 {
-                    this.props.ruleOpen?( <div className={'inner-div-a-v'} data-root={0} data-id={item.id} style={{marginLeft: padding * this.props.marginItem-3}}>
+                    this.props.ruleOpen ? (<div className={'inner-div-a-v'} data-root={0} data-id={item.id}
+                                                style={{marginLeft: padding * this.props.marginItem - 3}}>
                         {
                             THIS.props.iconTree ? (
                                 <div className={'tree-menu-item-icon-tree-v'}>{THIS.props.iconTree}</div>
@@ -708,7 +726,7 @@ export class TreeMenu extends React.Component<TreeProps, any> {
                                 <div className={'tree-menu-item-left-image-v'}>{item.icon}</div>
                             ) : null
                         }
-                    </div>):null
+                    </div>) : null
                 }
 
                 <a
